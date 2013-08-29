@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="cltsApp">
+  <head>
+    <title>UNICEF CLTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  </head>
+  <body>
+
+
+    <form ng-controller="ActivationController" ng-submit="activate(msisdn)">
+      <fieldset>
+        <label for="msisdn">Mobile Number</label>
+        <input type="text" name="msisdn" ng-model="msisdn">
+        <input type="submit" value="activate">
+      </fieldset>
+    </form>
+   
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/clts.app.js"></script>
+  </body>
+</html>
