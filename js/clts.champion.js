@@ -1,5 +1,3 @@
-
-
 (function() {
 
     var app = angular.module('clts.champion', ['clts.villages']);
@@ -85,6 +83,3 @@
     });
 
 })();
-
-
-

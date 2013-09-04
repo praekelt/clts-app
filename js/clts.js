@@ -12,7 +12,7 @@ window.clts = {
 };
 
 window.clts.storage.get = function(key) {
-    console.log('- get', window.clts.storage.prefix, key)
+    console.log('- get', window.clts.storage.prefix, key);
     var d = localStorage.getItem(window.clts.storage.prefix + key) || false;
     if (d === false) return false;
     return JSON.parse(d);
@@ -20,8 +20,8 @@ window.clts.storage.get = function(key) {
 
 window.clts.storage.set = function(key, value) {
     console.log('- set', window.clts.storage.prefix, key);
-    var value = JSON.stringify(value);
-    localStorage.setItem(window.clts.storage.prefix + key, value);
+    var d = JSON.stringify(value);
+    localStorage.setItem(window.clts.storage.prefix + key, d);
 };
 
 window.clts.api.url = function() {

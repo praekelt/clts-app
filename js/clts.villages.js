@@ -8,13 +8,8 @@
             var _that = this;
             var villages = window.clts.storage.get('villages');
 
-            // add a new village.            
-
             this.villages = villages;
             return this;
         }
     ]);
 })();
-
-
-
