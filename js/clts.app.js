@@ -1,7 +1,8 @@
 window.api_host = 'http://localhost:8000/api/v1/';
 
 
-var app = angular.module('cltsApp', []);
+
+var app = angular.module('activation', []);
 
 
 // this runs at the start of the app.
@@ -22,7 +23,7 @@ app.factory('dataService', ['$http', function($http) {
     if (!clts) {
         clts = {
             champion: {
-                msisdn: '1234567890',
+                msisdn: undefined,
                 activated: false
             },
             villages: {
@@ -36,11 +37,14 @@ app.factory('dataService', ['$http', function($http) {
     };
 
     var activateChampion = function(msisdn) {
+        
 
         var url = window.api_host + 'champions/' + msisdn +  '/activate/';
+        console.log('---------------', url)
         $http.post(url, {})
             .success(function(data, status, headers, config) {
 
+                console.log('-----xxxxxxxxxxxxxxx----------')
                 clts.champion.activated = true;
                 clts.villages = data;
                 saveData();
@@ -62,7 +66,7 @@ app.factory('dataService', ['$http', function($http) {
 }]);
 
 // the activation controller...
-app.controller('ActivationController', ['$scope', 'dataService',
+app.controller('activationController', ['$scope', 'dataService',
     function($scope, dataService) {
         $scope.champion = dataService.data.champion;
         $scope.activate = function(msisdn) {
