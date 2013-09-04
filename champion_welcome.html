@@ -1,0 +1,11 @@
+<h2>Welcome {{ champion.name }}</h2>
+<p>You will be responsible for the following villages:</p>
+
+<ol>
+     <li ng-repeat="village in villages">
+        {{ village.name }}<br>
+        {{ village.latitude }} {{ village.longitude }}
+     </li>
+</ol>
+
+<button class="btn btn-primary" ng-click="continue()">Continue</button>

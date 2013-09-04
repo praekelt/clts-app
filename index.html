@@ -15,24 +15,11 @@
     <script type="text/ng-template" id="menu.html">
       I am the menu.
     </script>
-
-    <script type="text/ng-template" id="champion_activate.html">
-        <h2>Welcome to CLTS</h2>
-        <form ng-submit="activate(champion.msisdn)">
-            <div class="form-group">
-                <p>Please activate your profile by entering your mobile number</p>
-                <label for="msisdn">Mobile number</label>
-                <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required>            
-                <small></small>
-            </div>
-            <input class="btn btn-primary" type="submit" value="Activate">
-        </form>
-    </script>
-
    
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 
     <script type="text/javascript" src="js/clts.js"></script>
+    <script type="text/javascript" src="js/clts.villages.js"></script>
     <script type="text/javascript" src="js/clts.champion.js"></script>
     <script type="text/javascript" src="js/clts.init.js"></script>
 
