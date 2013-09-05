@@ -11,16 +11,11 @@
         }
     ]);
 
-    app.controller('menuController', [
-        function() {
-        }
-    ]);
-
     app.config(function($routeProvider) {
 
-        $routeProvider
-            .when('/', {
-                controller: 'menuController',
+        $routeProvider.
+            when('/', {
+                //controller: 'menuController',
                 templateUrl: 'menu.html'
             });
     });

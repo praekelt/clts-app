@@ -15,7 +15,7 @@
             var activate = function(msisdn) {
 
                 var url = window.clts.api.url('champions', msisdn, 'activate');
-                $http.post(url).
+                var promise = $http.post(url).
                     then(function(o) {
 
                         // save data.
@@ -25,9 +25,9 @@
                         _that.champion = o.data.champion;
                         _that.champion.notFound = false;
 
-                        if (_that.champion.activated) {
-                            $rootScope.$broadcast('championModel::activated');
-                        }
+                        // if (_that.champion.activated) {
+                        //     $rootScope.$broadcast('championModel::activated');
+                        // }
 
                     }, function(o) {
                         if (o.status == 404) {
@@ -35,6 +35,7 @@
                         }
                         _that.error = true;
                     });
+                return promise;
             };
 
             this.champion = champion;
@@ -47,11 +48,13 @@
         function($scope, championModel) {
 
             $scope.champion = championModel.champion;
-            $scope.activate = championModel.activate;
-
-            $scope.$on('championModel::activated', function(event) {
-                window.location = '#/champion/welcome/';
-            });
+            $scope.activate = function(msisdn) {
+                championModel.activate(msisdn).then(function() {
+                    if (championModel.champion.activated) {
+                        window.location = '#/champion/welcome/';
+                    }
+                });
+            };
         }
     ]);
 
