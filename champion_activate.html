@@ -7,8 +7,17 @@
         <label for="msisdn">Mobile number</label>
         <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required>
         <p class="text-danger" ng-show="champion.notFound">
-            We do not know this mobile number. Please try again.
+            We do not know this mobile number. Are you sure you've
+            typed it in correctly?
         </p>
     </div>
-    <input class="btn btn-primary" type="submit" value="Activate">
+    <div class="actions">
+        <input class="btn btn-primary" type="submit" value="Activate">
+    </div>
+
+    <p class="text-danger" ng-show="error">
+        There appears to be a problem. Are you currently connected
+        to the internet? (Error code: {{ errorCode }})
+    </p>
+    
 </form>

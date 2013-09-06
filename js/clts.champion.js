@@ -21,23 +21,24 @@
                         // save data.
                         window.clts.storage.set('champion', o.data.champion);
                         window.clts.storage.set('villages', o.data.villages);
-                        _that.error = false;
                         _that.champion = o.data.champion;
                         _that.champion.notFound = false;
-
-                        // if (_that.champion.activated) {
-                        //     $rootScope.$broadcast('championModel::activated');
-                        // }
+                        return {error: false, status: o.status};
 
                     }, function(o) {
+                        
+                        error = true;
                         if (o.status == 404) {
                             _that.champion.notFound = true;
+                            error = false;
                         }
-                        _that.error = true;
+                        return {error: error, status: o.status};
+                        
                     });
                 return promise;
             };
 
+            this.status = {error: false, margle: '123'};
             this.champion = champion;
             this.activate = activate;
             return this;
@@ -49,7 +50,11 @@
 
             $scope.champion = championModel.champion;
             $scope.activate = function(msisdn) {
-                championModel.activate(msisdn).then(function() {
+                championModel.activate(msisdn).then(function(o) {
+
+                    $scope.error = o.error;
+                    $scope.errorCode = o.status;
+
                     if (championModel.champion.activated) {
                         window.location = '#/champion/welcome/';
                     }
