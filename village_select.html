@@ -1,4 +1,4 @@
-<p>Please selec the village that you would like to capture:</p>
+<p>Please select the village that you would like to capture:</p>
 
 <ol>
      <li ng-repeat="village in villages" ng-click="selectVillage(village)">
@@ -10,10 +10,11 @@
 <p>Or, create a new village:</p>
 <form ng-controller="createVillageController" ng-submit="create(name)">
     <div class="form-group">
-        <label for="name">
-            Village name
-        </label>
+        <label for="name">Village name</label>
         <input class="form-control" type="text" name="name" id="name" ng-model="name" placeholder="E.g.: Pretoria" required>
+        <p class="text-danger" ng-show="duplicate">
+            A village of this name already exists. Please try again
+        </p>
     </div>
     <input class="btn btn-primary" type="submit" value="Create">
 </form>

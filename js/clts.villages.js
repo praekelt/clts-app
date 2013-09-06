@@ -9,11 +9,15 @@
             var villages = window.clts.storage.get('villages');
 
             var createVillage = function(name) {
-                var village = {
-                    name: name
-                };
+                //return {duplicate: true};
+                // TODO: search the list of villages for
+                // one with the same name,
+                // and responsd with an error.
+                var village = {name: name};
                 _that.villages.push(village);
                 window.clts.storage.set('villages', villages);
+
+                return village;
             };
 
             this.villages = villages;
@@ -31,6 +35,10 @@
 
 
             $scope.selectVillage = function(village) {
+
+                // use the intent from those others guys stuff
+                // to and pass along the selected
+                // villages data.
                 console.log(village);
             };
 
@@ -41,12 +49,11 @@
         ['$scope', 'villagesModel',
         
         function($scope, villagesModel) {
-
-            
-
-            $scope.name = 'A new village';
             $scope.create = function(name) {
-                villagesModel.createVillage(name);
+                var response = villagesModel.createVillage(name);
+                if (response.duplicate) {
+                    $scope.duplicate = true;
+                }
             };
         }
     ]);
@@ -59,7 +66,6 @@
                 templateUrl: 'village_select.html'
             });
     });
-
 
 
 })();
