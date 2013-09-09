@@ -1,15 +1,16 @@
 (function() {
 
-    var app = angular.module('clts', ['clts.champion', 'clts.faqs']);
+    var app = angular.module('clts', ['clts.champion', 'clts.faqs', 'clts.pages']);
 
-    app.run(['$rootScope', 'championModel', 'faqsModel',
-        function($rootScope, championModel, faqsModel) {
+    app.run(['$rootScope', 'championModel', 'faqsModel', 'pagesModel',
+        function($rootScope, championModel, faqsModel, pagesModel) {
             
             if (championModel.champion.activated === false) {
                 window.location = '#/champion/activate/';
             }
 
             faqsModel.update();
+            pagesModel.update('training');
         }
     ]);
 
