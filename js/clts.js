@@ -1,20 +1,22 @@
 window.clts = {
 
     api: {
-        baseURL: 'http://qa.clts.praekeltfoundation.org/api/v1/',
-    },
+        //baseURL: 'http://qa.clts.praekeltfoundation.org/api/v1/',
+        baseURL: 'http://localhost:8080/api/v1/',
 
+    },
     storage: {
         prefix: 'clts.v1.',
     },
 
-    module: angular.module('clts', []),
+    mainApp: angular.module('clts', []),
 };
 
 window.clts.storage.get = function(key) {
     console.log('- get', window.clts.storage.prefix, key);
     var d = window.localStorage.getItem(window.clts.storage.prefix + key) || false;
     if (d === false) return false;
+
     return JSON.parse(d);
 };
 

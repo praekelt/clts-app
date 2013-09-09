@@ -69,9 +69,8 @@
 
             $scope.champion = championModel.champion;
             $scope.villages = villagesModel.villages;
-            $scope.continue = function() {
-                console.log('pew');
-                window.location = '/';
+            $scope.go = function() {
+                window.location = '#/';
             };
         }
     ]);

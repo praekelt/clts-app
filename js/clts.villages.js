@@ -34,12 +34,18 @@
             $scope.villages = villagesModel.villages;
 
 
+            $scope.form_1 = function(village) {
+                formContext.startFormActivity('new_village_profile', '');
+            };
+
+            $scope.form_2 = function(village) {
+                formContext.startFormActivity('new_cc_monthly_report', '');
+            };
+
             $scope.selectVillage = function(village) {
 
-                // use the intent from those others guys stuff
-                // to and pass along the selected
-                // villages data.
-                console.log(village);
+                // so this opens the form...
+                
             };
 
         }

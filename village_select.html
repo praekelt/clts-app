@@ -1,9 +1,13 @@
 <p>Please select the village that you would like to capture:</p>
 
-<ol>
+<ol class="village-list">
      <li ng-repeat="village in villages" ng-click="selectVillage(village)">
-        {{ village.name }}<br>
-        {{ village.latitude }} {{ village.longitude }}
+        <p>{{ village.name }}</p>
+        
+
+        <button class="btn btn-info" ng-click="form_1(village)">Village Profile</button>
+
+        <button class="btn btn-info" ng-click="form_2(village)">Monthly Report</button>
      </li>
 </ol>
 
