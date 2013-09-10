@@ -18,12 +18,20 @@
                 var promise = $http.post(url).
                     then(function(o) {
 
-                        // save data.
-                        window.clts.storage.set('champion', o.data.champion);
-                        window.clts.storage.set('villages', o.data.villages);
-                        _that.champion = o.data.champion;
-                        _that.champion.notFound = false;
-                        return {error: false, status: o.status};
+                        if (typeof(o.data.champion) !== 'undefined') {
+                            window.clts.storage.set('champion', o.data.champion);
+
+                            _that.champion = o.data.champion;
+                            _that.champion.notFound = false;
+                            return {error: false};
+                        }
+
+                        if (typeof(o.data.villages) !== 'undefined') {
+                            window.clts.storage.set('villages', o.data.villages);
+                            return {error: false};
+                        }
+                        
+                        return {error: true, status: o.status};
 
                     }, function(o) {
                         
@@ -52,8 +60,11 @@
             $scope.activate = function(msisdn) {
                 championModel.activate(msisdn).then(function(o) {
 
+                    $scope.champion = championModel.champion;
                     $scope.error = o.error;
                     $scope.errorCode = o.status;
+
+
 
                     if (championModel.champion.activated) {
                         window.location = '#/champion/welcome/';
