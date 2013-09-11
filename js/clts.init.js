@@ -5,9 +5,10 @@
     app.run(['$rootScope', 'championModel', 'faqsModel', 'pagesModel',
         function($rootScope, championModel, faqsModel, pagesModel) {
             
-            if (championModel.champion.activated === false) {
-                window.location = '#/champion/activate/';
-            }
+            // disable activation.            
+            // if (championModel.champion.activated === false) {
+            //     window.location = '#/champion/activate/';
+            // }
 
             faqsModel.update();
             pagesModel.update('training');

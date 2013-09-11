@@ -8,9 +8,15 @@
 }
 .main-menu .col-xs-6,
 .main-menu .col-xs-12 {
-  border: 1px #333 solid;
-  height: 80px;
-  line-height: 80px;
+  height: 106px;
+}
+.main-menu img {
+  margin: 5px 0 0 0;
+}
+.main-menu a,
+.main-menu a:hover {
+  color: #333;
+  text-decoration: none;
 }
 .actions {
   margin: 0 0 18px 0;
