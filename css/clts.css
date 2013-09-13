@@ -3,20 +3,75 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.container {
+  position: relative;
+  border: 1px #333 solid;
+  width: 240px;
+  height: 320px;
+  overflow: hidden;
+}
 .main-menu {
+  width: 100%;
   text-align: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #6d6860;
 }
-.main-menu .col-xs-6,
-.main-menu .col-xs-12 {
-  height: 106px;
+.main-menu .update {
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  z-index: 10;
+  width: 70px;
+  height: 70px;
+  background: #cacaca;
+  border: 1px #b1b1b1 solid;
+  border-radius: 35px;
+  text-align: left;
 }
-.main-menu img {
-  margin: 5px 0 0 0;
+.main-menu .update img {
+  margin: 31px 0 0 2px;
+  padding: 8px;
+}
+.main-menu .btn-small {
+  height: 100px;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.main-menu .btn-small img {
+  width: 64px;
+  height: 63px;
+  background: #fff;
+  border-radius: 63px;
+  margin: 0 0 5px 0;
+}
+.main-menu .btn-small:first-child {
+  border-right: 1px #bfbfbf solid;
+}
+.main-menu .btn-large {
+  height: 119px;
+  background: #e2e2e2;
+  border: 1px #bfbfbf solid;
+  border-width: 1px 0;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.main-menu .btn-large img {
+  width: 72px;
+  height: 71px;
+  border-radius: 71px;
+  background: #cacaca;
 }
 .main-menu a,
 .main-menu a:hover {
-  color: #333;
+  color: #6d6860;
   text-decoration: none;
+}
+.main-menu a:active img,
+.main-menu a:hover img {
+  box-shadow: 0 0 21px #bee6ff;
 }
 .actions {
   margin: 0 0 18px 0;
