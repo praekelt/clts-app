@@ -4,44 +4,47 @@
         <img src="gfx/Refresh.png">
     </div>
 
-
     <div class="row">
-        <div class="col-xs-6 btn-small">
-            <a href="#">
+        <div class="btn-small">
+            <span>
                 <img src="gfx/Contacts.png">
+                <br>
                 Contacts
-            </a>
+            </span>
         </div>
 
-        <div class="col-xs-6 btn-small">
-            <a href="#">
+        <div class="btn-small">
+            <span>
                 <img src="gfx/Status.png">
+                <br>
                 Status
-            </a>
+            </span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 btn-large">
-            <a href="http://ec2-54-229-111-127.eu-west-1.compute.amazonaws.com:8080/dhis/mobile/index">
+        <div class="btn-large">
+            <span ng-click="$navigate.go('/collect')">
                 <img src="gfx/CollectData.png">
-            </a>
+            </span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-6 btn-small">
-            <a href="#/faqs/">
+        <div class="btn-small">
+            <span ng-click="$navigate.go('/faqs')">
                 <img src="gfx/FAQs.png">
+                <br>
                 FAQs
             </a>
         </div>
 
-        <div class="col-xs-6 btn-small">
-            <a href="#/pages/training/">
+        <div class="btn-small">
+            <span ng-click="$navigate.go('/pages/training')">
                 <img src="gfx/Training.png">
+                <br>
                 Training
-            </a>
+            </span>
         </div>
     </div>
 </div>

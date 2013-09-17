@@ -1,8 +1,9 @@
-<ol>
-    <h2>FAQs</h2>
-
-     <li ng-repeat="faq in faqs">
-        {{ faq.question }}<br>
-        {{ faq.answer }}
-     </li>
-</ol>
+<div class="faqs">
+    <div toolbar-menu></div>
+    <ol>
+         <li ng-repeat="faq in faqs">
+            <strong>{{ faq.question }}</strong><br>
+            {{ faq.answer }}
+         </li>
+    </ol>
+</div>

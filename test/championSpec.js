@@ -19,7 +19,6 @@ describe('clts.champion', function() {
             $scope: myScope,
         });
 
-
         $_httpBackend_ = $httpBackend;
 
     }));

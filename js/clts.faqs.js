@@ -15,7 +15,7 @@
                     then(function(o) {
 
                         if (o.data.length > 0 && o.status == 200) {
-                          window.clts.storage.set('faqs', o.data);  
+                          window.clts.storage.set('faqs', o.data);
                           _that.faqs = o.data;
                         }
                     });
@@ -30,15 +30,16 @@
 
     app.controller('faqsController',
         ['$scope', 'faqsModel',
-        
+
         function($scope, faqsModel) {
+
             $scope.faqs = faqsModel.faqs;
         }
     ]);
 
     app.config(function($routeProvider) {
         $routeProvider.
-            when('/faqs/', {
+            when('/faqs', {
                 controller: 'faqsController',
                 templateUrl: 'faqs.html'
             });
