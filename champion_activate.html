@@ -5,7 +5,14 @@
 
         
         <label for="msisdn">Mobile number</label>
-        <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required>
+        
+        <!-- <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required> -->
+
+        <select ng-model="msisdn">
+            <option value="1234567890">1234567890</option>
+            <option value="1020304050">1020304050</option>
+        </select>
+
         <p class="text-danger" ng-show="champion.notFound">
             We do not know this mobile number. Are you sure you've
             typed it in correctly?

@@ -53,8 +53,10 @@
         }
     ]);
 
-    app.controller('activateController', ['$scope', 'championModel',
-        function($scope, championModel) {
+    app.controller('activateController',
+        
+        ['$scope', '$navigate', 'championModel',
+        function($scope, $navigate, championModel) {
 
             $scope.champion = championModel.champion;
             $scope.activate = function(msisdn) {
@@ -64,36 +66,32 @@
                     $scope.error = o.error;
                     $scope.errorCode = o.status;
 
-
-
                     if (championModel.champion.activated) {
-                        window.location = '#/champion/welcome/';
+                        $navigate.go('/champion/welcome');
                     }
                 });
             };
         }
     ]);
 
-    app.controller('welcomeController', ['$scope', 'championModel', 'villagesModel',
-        
-        function($scope, championModel, villagesModel) {
+    app.controller('welcomeController', 
 
+        ['$scope', '$navigate', 'championModel', 'villagesModel',
+        function($scope, $navigate, championModel, villagesModel) {
             $scope.champion = championModel.champion;
             $scope.villages = villagesModel.villages;
-            $scope.go = function() {
-                window.location = '#/';
-            };
+            $scope.$navigate = $navigate;
         }
     ]);
 
     app.config(function($routeProvider) {
 
         $routeProvider.
-            when('/champion/activate/', {
+            when('/champion/activate', {
                 controller: 'activateController',
                 templateUrl: 'champion_activate.html'
             }).
-            when('/champion/welcome/', {
+            when('/champion/welcome', {
                 controller: 'welcomeController',
                 templateUrl: 'champion_welcome.html'
             });

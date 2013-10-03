@@ -14,14 +14,14 @@
     app.run(['$rootScope', 'championModel', 'faqsModel', 'pagesModel',
         function($rootScope, championModel, faqsModel, pagesModel) {
 
-            
-            // disabled activation.            
-            // if (championModel.champion.activated === false) {
-            //     window.location = '#/champion/activate/';
-            // }
+
+            if (championModel.champion.activated === false) {
+                window.location = '#/champion/activate';
+            }
 
             faqsModel.update();
             pagesModel.update('training');
+  
         }
     ]);
 
@@ -31,12 +31,8 @@
             restrict: 'A',
             templateUrl: 'toolbar.html',
             link: function ($scope, $el, attrs) {
-                console.log('pew', $navigate);
-                $scope.$navigate = $navigate;
-
-                $scope.pew = function(p) {
+                $scope.back = function(p) {
                     $navigate.go(p);
-                    console.log('pew');
                 };
             }
         };
@@ -58,6 +54,11 @@
 
                 console.log('-- done');
             };
+
+            $scope.pew = function() {
+                console.log('gogogogo')
+                navigationContext.startVillageListActivity();
+            }
         }
     ]);
 

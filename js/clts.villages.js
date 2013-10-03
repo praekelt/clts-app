@@ -6,7 +6,7 @@
         function($rootScope, $http) {
 
             var _that = this;
-            var villages = window.clts.storage.get('villages');
+            var villages = window.clts.storage.get('villages') || [];
 
             var createVillage = function(name) {
                 //return {duplicate: true};
@@ -16,7 +16,6 @@
                 var village = {name: name};
                 _that.villages.push(village);
                 window.clts.storage.set('villages', villages);
-
                 return village;
             };
 
@@ -34,12 +33,26 @@
             $scope.villages = villagesModel.villages;
 
 
-            $scope.form_1 = function(village) {
-                formContext.startFormActivity('new_village_profile', '');
+
+
+            $scope.form_1 = function(village, fields) {
+
+                var fieldOverrides = {
+                    fieldOverrides: "{\"name\":\"pew\"}"
+                };
+                var f = JSON.stringify(fieldOverrides);
+                alert(f);
+                window.formContext.startFormActivity('village_profile', undefined, f);
             };
 
-            $scope.form_2 = function(village) {
-                formContext.startFormActivity('new_cc_monthly_report', '');
+            $scope.form_2 = function(village, fields) {
+                var fieldOverrides = {
+                    fieldOverrides: "{\"name\":\"pew\"}"
+                };
+                var f = JSON.stringify(fieldOverrides);
+                alert(f);
+                window.formContext.startFormActivity('cc_monthly_report', undefined, f);
+
             };
 
             $scope.selectVillage = function(village) {
@@ -67,7 +80,7 @@
 
     app.config(function($routeProvider) {
         $routeProvider.
-            when('/village/select/', {
+            when('/village/select', {
                 controller: 'selectVillageController',
                 templateUrl: 'village_select.html'
             });
