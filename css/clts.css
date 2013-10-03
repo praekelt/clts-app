@@ -365,6 +365,13 @@ iframe {
   top: 50px;
   left: 0;
 }
+.content {
+  padding: 9px;
+}
+.actions {
+  text-align: right;
+  margin: 9px 0;
+}
 .toolbar-menu {
   position: relative;
   height: 50px;

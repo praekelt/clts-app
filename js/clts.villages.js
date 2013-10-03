@@ -33,34 +33,18 @@
             $scope.villages = villagesModel.villages;
 
 
-
-
-            $scope.form_1 = function(village, fields) {
-
-                var fieldOverrides = {
-                    fieldOverrides: "{\"name\":\"pew\"}"
+            $scope.openForm = function(name, village)
+            {
+                var meta = {
+                    fieldOverrides: "{\"name\":\""+ village.name + "\",\"code\":\"" + village.code + "\"}"
                 };
-                var f = JSON.stringify(fieldOverrides);
-                alert(f);
-                window.formContext.startFormActivity('village_profile', undefined, f);
-            };
 
-            $scope.form_2 = function(village, fields) {
-                var fieldOverrides = {
-                    fieldOverrides: "{\"name\":\"pew\"}"
+                if (typeof(window.formContext) === 'undefined') {
+                    alert('Not running within ZIGGY');
+                    return;
                 };
-                var f = JSON.stringify(fieldOverrides);
-                alert(f);
-                window.formContext.startFormActivity('cc_monthly_report', undefined, f);
-
+                window.formContext.startFormActivity(name, undefined, JSON.stringify(meta));
             };
-
-            $scope.selectVillage = function(village) {
-
-                // so this opens the form...
-                
-            };
-
         }
     ]);
 

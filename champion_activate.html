@@ -1,30 +1,34 @@
-<h2>Welcome to CLTS</h2>
-<form ng-submit="activate(champion.msisdn)">
-    <div class="form-group">
-        <p>Please activate your profile by entering your mobile number</p>
-
-        
-        <label for="msisdn">Mobile number</label>
-        
-        <!-- <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required> -->
-
-        <select ng-model="msisdn">
-            <option value="1234567890">1234567890</option>
-            <option value="1020304050">1020304050</option>
-        </select>
-
-        <p class="text-danger" ng-show="champion.notFound">
-            We do not know this mobile number. Are you sure you've
-            typed it in correctly?
-        </p>
-    </div>
-    <div class="actions">
-        <input class="btn btn-primary" type="submit" value="Activate">
-    </div>
-
-    <p class="text-danger" ng-show="error">
-        There appears to be a problem. Are you currently connected
-        to the internet? (Error code: {{ errorCode }})
-    </p>
+<div class="content">
+    <h2>Welcome to CLTS</h2>
     
-</form>
+    <form name="form" ng-submit="activate(champion.msisdn)" novalidate>
+        
+        <fieldset>
+            <p>Please activate your profile by entering your mobile number</p>
+
+            
+            <label for="msisdn">Mobile number</label>
+            
+            <!-- <input class="form-control" type="text" name="msisdn" id="msisdn" ng-model="champion.msisdn" placeholder="E.g.: 1234567890" required> -->
+            <select ng-model="champion.msisdn" name="msisdn" id="msisdn" required>
+                <option value="1234567890">1234567890</option>
+                <option value="1020304050">1020304050</option>
+                <option value="XXXXXXXXXX">XXXXXXXXXX</option>
+            </select>
+
+            <p class="text-danger" ng-show="champion.notFound">
+                We do not know this mobile number. Are you sure you've
+                typed it in correctly?
+            </p>
+        </fieldset>
+        <div class="actions">
+            <input type="submit" value="Activate">
+        </div>
+
+        <p class="text-danger" ng-show="error">
+            There appears to be a problem. Are you currently connected
+            to the internet? (Error code: {{ errorCode }})
+        </p>
+        
+    </form>
+</div>

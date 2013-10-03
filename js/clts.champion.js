@@ -5,50 +5,50 @@
     app.factory('championModel', ['$rootScope', '$http',
         function($rootScope, $http) {
 
-            var _that = this;
-
-            var champion = window.clts.storage.get('champion');
-            if (champion === false) {
-                champion = {activated: false, msisdn: '1234567890'};
+            this.champion = window.clts.storage.get('champion');
+            if (this.champion === false) {
+                this.champion = {activated: false, msisdn: 'XXXXXXXXXX'};
             }
 
-            var activate = function(msisdn) {
+            activate = function(msisdn) {
 
-                var url = window.clts.api.url('champions', msisdn, 'activate');
-                var promise = $http.post(url).
-                    then(function(o) {
-
-                        if (typeof(o.data.champion) !== 'undefined') {
-                            window.clts.storage.set('champion', o.data.champion);
-
-                            _that.champion = o.data.champion;
-                            _that.champion.notFound = false;
-                            return {error: false};
+                var that = this;
+                var promise = $http.post(window.clts.api.url('champions', msisdn, 'activate'))
+                    .error(function(res, status) {
+                        // at some stage we'll standardise this
+                        var error = "An unknown error occured, are you connected to the Internet?";
+                        if (status == 404) {
+                            error = "The mobile number could not be found";
                         }
+                        return {error: error};
+                    })
+                    .then(function(res) {
 
-                        if (typeof(o.data.villages) !== 'undefined') {
-                            window.clts.storage.set('villages', o.data.villages);
-                            return {error: false};
-                        }
-                        
-                        return {error: true, status: o.status};
+                        // activation was successfull
+                        if (res.status == 200) {
 
-                    }, function(o) {
-                        
-                        error = true;
-                        if (o.status == 404) {
-                            _that.champion.notFound = true;
-                            error = false;
+                            // and store the villages that they're responsible for
+                            if (typeof(res.data.villages) !== 'undefined') {
+                                window.clts.storage.set('villages', res.data.villages);
+                            }
+
+                            // Save the new community champion
+                            if (typeof(res.data.champion) !== 'undefined') {
+                                that.champion = res.data.champion;
+                                window.clts.storage.set('champion', res.data.champion);
+                            }
+
+                            return {};
+
+                        }  else {
+                            return {error: "You could not be activated."};
                         }
-                        return {error: error, status: o.status};
-                        
                     });
+
                 return promise;
             };
 
-            this.status = {error: false, margle: '123'};
-            this.champion = champion;
-            this.activate = activate;
+            this.activate = activate.bind(this);
             return this;
         }
     ]);
@@ -59,16 +59,21 @@
         function($scope, $navigate, championModel) {
 
             $scope.champion = championModel.champion;
+
             $scope.activate = function(msisdn) {
+
+                championModel.activate(msisdn)
+                    .then(function(p) {
+                        if (championModel.champion.activated) {
+                            $navigate.go('/champion/welcome');
+                        }  
+                    });
+
                 championModel.activate(msisdn).then(function(o) {
 
-                    $scope.champion = championModel.champion;
-                    $scope.error = o.error;
-                    $scope.errorCode = o.status;
-
-                    if (championModel.champion.activated) {
-                        $navigate.go('/champion/welcome');
-                    }
+                    //$scope.champion = championModel.champion;
+                    
+                    
                 });
             };
         }

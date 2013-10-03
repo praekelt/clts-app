@@ -11,7 +11,8 @@
         'clts.dataCollect',
     ]);
 
-    app.run(['$rootScope', 'championModel', 'faqsModel', 'pagesModel',
+    app.run(['$rootScope',
+        'championModel', 'faqsModel', 'pagesModel',
         function($rootScope, championModel, faqsModel, pagesModel) {
 
 
@@ -32,7 +33,7 @@
             templateUrl: 'toolbar.html',
             link: function ($scope, $el, attrs) {
                 $scope.back = function(p) {
-                    $navigate.go(p);
+                    $navigate.go(p, undefined, true);
                 };
             }
         };
@@ -44,6 +45,15 @@
         function($scope, $navigate, championModel, faqsModel, pagesModel) {
 
             $scope.$navigate = $navigate;
+
+            $scope.reset = function() {
+
+                if (confirm("Are you sure you want to RESET the app?")) {
+
+                    window.localStorage.clear();
+                    window.location = '/';
+                }
+            };
 
             $scope.update = function() {
 

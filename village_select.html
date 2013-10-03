@@ -7,8 +7,8 @@
 
         <p>{{ village.name }}</p>
 
-        <button class="btn btn-info" ng-click="form_1(village)">Village Profile</button>
-        <button class="btn btn-info" ng-click="form_2(village)">Monthly Report</button>
+        <button ng-click="openForm('village_profile', village)">Village Profile</button>
+        <button ng-click="openForm('cc_monthly_report', village)">Monthly Report</button>
      </li>
 </ol>
 
