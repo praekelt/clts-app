@@ -42,7 +42,7 @@
                 if (typeof(window.formContext) === 'undefined') {
                     alert('Not running within ZIGGY');
                     return;
-                };
+                }
                 window.formContext.startFormActivity(name, undefined, JSON.stringify(meta));
             };
         }
