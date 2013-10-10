@@ -3,19 +3,15 @@
     var app = angular.module('clts.villages', []);
 
     app.factory('villagesModel', [
-        '$rootScope',
         '$http',
         
-        function($rootScope, $http) {
+        function($http) {
 
             var _that = this;
             var villages = window.clts.storage.get('villages') || [];
 
             var createVillage = function(name) {
-                //return {duplicate: true};
-                // TODO: search the list of villages for
-                // one with the same name,
-                // and responsd with an error.
+                
                 var village = {name: name};
                 _that.villages.push(village);
                 window.clts.storage.set('villages', villages);
@@ -44,7 +40,7 @@
                 };
 
                 if (typeof(window.formContext) === 'undefined') {
-                    alert('Not running within ZIGGY');
+                    alert('Not running with-in ZIGGY!');
                     return;
                 }
                 window.formContext.startFormActivity(name, undefined, JSON.stringify(meta));
@@ -52,15 +48,15 @@
         }
     ]);
 
-    app.controller('createVillageController',
-        ['$scope', 'villagesModel',
+    app.controller('createVillageController', [
+        '$scope',
+        'villagesModel',
         
         function($scope, villagesModel) {
+
             $scope.create = function(name) {
-                var response = villagesModel.createVillage(name);
-                if (response.duplicate) {
-                    $scope.duplicate = true;
-                }
+                var village = villagesModel.createVillage(name);
+                $scope.name = '';
             };
         }
     ]);

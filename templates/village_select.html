@@ -23,14 +23,9 @@
         <p>Create a new village:</p>
         
         <label for="name">Village name</label>
-        <input class="form-control" type="text" name="name" id="name" ng-model="name" placeholder="E.g.: Pretoria" required>
-        <p class="text-danger" ng-show="duplicate">
-            A village of this name already exists. Please try again
-        </p>
+        <input class="form-control" type="text" ng-model="name" name="name" id="name" ng-model="name" placeholder="E.g.: Pretoria" required>
         <p>
             <input class="btn btn-primary" type="submit" value="Create">
         </p>
     </fieldset>
-
-    
 </form>
