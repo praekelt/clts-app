@@ -20,8 +20,8 @@
 
         function($rootScope, $navigate, championModel, faqsModel, pagesModel) {
 
-            if (championModel.champion.activated === false) {
-                $navigate.go('/champion/activate', false);
+            if (championModel.champion.activated !== true) {
+                $navigate.go('/champion/activate', 'none');
             }
 
             // TODO: grab faqs and pages updates.
@@ -76,7 +76,7 @@
         $routeProvider.
             when('/', {
                 controller: 'menuController',
-                templateUrl: 'menu.html'
+                templateUrl: 'templates/menu.html'
             });
     });
 })();

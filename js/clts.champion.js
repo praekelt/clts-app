@@ -4,52 +4,41 @@
 
 
 
-    app.factory('championModel', 
-        ['$rootScope', '$http',
+    app.factory('championModel', [
+        '$rootScope',
+        '$http',
+        
         function($rootScope, $http) {
 
             this.champion = window.clts.storage.get('champion') || {};
-            
             var activate = function(msisdn) {
-                $http.post(window.clts.api.url('champions', msisdn, 'activate')).
-                    error(function(data, status) {
+                var that = this;
 
+                var promise =$http.post(window.clts.api.url('champions', msisdn, 'activate')).
+                    success(function(data, status) {
 
+                        if (status == 200) {
 
-                        // // at some stage we'll standardise this
-                        // var error = "An unknown error occured, are you connected to the Internet?";
-                        // if (status == 404) {
-                        //     error = "The mobile number could not be found";
-                        // }
-                        // return {error: error};
+                            if (typeof(data.champion) !== 'undefined') {
+                                that.champion = data.champion;
+                                that.champion.activated = true;
+                                window.clts.storage.set('champion', that.champion);
+                            }
+
+                            if (typeof(data.villages) !== 'undefined') {
+                                window.clts.storage.set('villages', data.villages);
+                            }
+
+                        } else {
+                            that.champion.activated = false;
+                            that.champion.activationErrorCode = status;
+                        }
                     }).
-                    success(function(data, status, ) {
+                    error(function(data, status) {
+                        that.champion.activationErrorCode = status;
+                    });
 
-                    })
-                //     .then(function(res) {
-
-                //         // activation was successfull
-                //         if (res.status == 200) {
-
-                //             // and store the villages that they're responsible for
-                //             if (typeof(res.data.villages) !== 'undefined') {
-                //                 window.clts.storage.set('villages', res.data.villages);
-                //             }
-
-                //             // Save the new community champion
-                //             if (typeof(res.data.champion) !== 'undefined') {
-                //                 that.champion = res.data.champion;
-                //                 window.clts.storage.set('champion', res.data.champion);
-                //             }
-
-                //             return {};
-
-                //         }  else {
-                //             return {error: "You could not be activated."};
-                //         }
-                //     });
-
-                // return promise;
+                return promise;
             };
 
             this.activate = activate.bind(this);
@@ -57,41 +46,39 @@
         }
     ]);
 
-    app.controller('activateController',
-        
-        ['$scope', '$navigate', 'championModel',
+    app.controller('activateController', [
+        '$scope',
+        '$navigate',
+        'championModel',
+
         function($scope, $navigate, championModel) {
 
             $scope.champion = championModel.champion;
 
             $scope.activate = function(msisdn) {
-
-                championModel.activate(msisdn)
-                    .then(function(p) {
+                championModel.activate(msisdn).
+                    then(function() {
                         if (championModel.champion.activated) {
                             $navigate.go('/champion/welcome');
-                        }  
+                        }
                     });
-
-                championModel.activate(msisdn).then(function(o) {
-
-                    console.log(o);
-
-                    //$scope.champion = championModel.champion;
-                    
-                    
-                });
             };
         }
     ]);
 
-    app.controller('welcomeController',
+    app.controller('welcomeController', [
+        '$scope',
+        '$navigate',
+        'championModel',
+        'villagesModel',
 
-        ['$scope', '$navigate', 'championModel', 'villagesModel',
         function($scope, $navigate, championModel, villagesModel) {
+            $scope.$navigate = $navigate;
+            
             $scope.champion = championModel.champion;
             $scope.villages = villagesModel.villages;
-            $scope.$navigate = $navigate;
+            
+
         }
     ]);
 
@@ -100,11 +87,11 @@
         $routeProvider.
             when('/champion/activate', {
                 controller: 'activateController',
-                templateUrl: 'champion_activate.html'
+                templateUrl: 'templates/champion_activate.html'
             }).
             when('/champion/welcome', {
                 controller: 'welcomeController',
-                templateUrl: 'champion_welcome.html'
+                templateUrl: 'templates/champion_welcome.html'
             });
 
     });

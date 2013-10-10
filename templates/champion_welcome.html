@@ -1,17 +1,21 @@
-<div class="content">
-    <h2>Welcome {{ champion.name }}</h2>
-    <p>You will be responsible for the following villages:</p>
+<h2>Welcome {{ champion.name }},</h2>
 
-    <div ng-hide="villages.length">You're not responsible for any villages at the moment.</div>
+    
+    
+    <p ng-hide="villages.length">
+        You're not responsible for any villages right now.
+    </p>
 
+    <p ng-show="villages.length">
+        You will be responsible for the following villages:
+    </p>
     <ol>
-         <li ng-repeat="village in villages">
+         <li ng-repeat="village in villages ">
             {{ village.name }}<br>
             {{ village.latitude }} {{ village.longitude }}
          </li>
     </ol>
 
-    <div class="actions">
-        <button ng-click="$navigate.go('/')">Continue</button>
-    </div>
+<div class="actions">
+    <button ng-click="$navigate.go('/')">Continue</button>
 </div>
