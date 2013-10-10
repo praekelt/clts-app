@@ -25,7 +25,7 @@
     ]);
 
     app.controller('selectVillageController',[
-        '$scope', 
+        '$scope',
         'villagesModel',
         
         function($scope, villagesModel) {
@@ -36,7 +36,7 @@
             $scope.openForm = function(name, village)
             {
                 var meta = {
-                    fieldOverrides: "{\"name\":\""+ village.name + "\",\"code\":\"" + village.code + "\"}"
+                    fieldOverrides: "{\"name\":\""+ village.name + "\",\"code\":\"\"}"
                 };
 
                 if (typeof(window.formContext) === 'undefined') {
