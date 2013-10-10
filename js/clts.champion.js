@@ -2,50 +2,54 @@
 
     var app = angular.module('clts.champion', ['clts.villages']);
 
-    app.factory('championModel', ['$rootScope', '$http',
+
+
+    app.factory('championModel', 
+        ['$rootScope', '$http',
         function($rootScope, $http) {
 
-            this.champion = window.clts.storage.get('champion');
-            if (this.champion === false) {
-                this.champion = {activated: false, msisdn: 'XXXXXXXXXX'};
-            }
+            this.champion = window.clts.storage.get('champion') || {};
+            
+            var activate = function(msisdn) {
+                $http.post(window.clts.api.url('champions', msisdn, 'activate')).
+                    error(function(data, status) {
 
-            activate = function(msisdn) {
 
-                var that = this;
-                var promise = $http.post(window.clts.api.url('champions', msisdn, 'activate'))
-                    .error(function(res, status) {
-                        // at some stage we'll standardise this
-                        var error = "An unknown error occured, are you connected to the Internet?";
-                        if (status == 404) {
-                            error = "The mobile number could not be found";
-                        }
-                        return {error: error};
+
+                        // // at some stage we'll standardise this
+                        // var error = "An unknown error occured, are you connected to the Internet?";
+                        // if (status == 404) {
+                        //     error = "The mobile number could not be found";
+                        // }
+                        // return {error: error};
+                    }).
+                    success(function(data, status, ) {
+
                     })
-                    .then(function(res) {
+                //     .then(function(res) {
 
-                        // activation was successfull
-                        if (res.status == 200) {
+                //         // activation was successfull
+                //         if (res.status == 200) {
 
-                            // and store the villages that they're responsible for
-                            if (typeof(res.data.villages) !== 'undefined') {
-                                window.clts.storage.set('villages', res.data.villages);
-                            }
+                //             // and store the villages that they're responsible for
+                //             if (typeof(res.data.villages) !== 'undefined') {
+                //                 window.clts.storage.set('villages', res.data.villages);
+                //             }
 
-                            // Save the new community champion
-                            if (typeof(res.data.champion) !== 'undefined') {
-                                that.champion = res.data.champion;
-                                window.clts.storage.set('champion', res.data.champion);
-                            }
+                //             // Save the new community champion
+                //             if (typeof(res.data.champion) !== 'undefined') {
+                //                 that.champion = res.data.champion;
+                //                 window.clts.storage.set('champion', res.data.champion);
+                //             }
 
-                            return {};
+                //             return {};
 
-                        }  else {
-                            return {error: "You could not be activated."};
-                        }
-                    });
+                //         }  else {
+                //             return {error: "You could not be activated."};
+                //         }
+                //     });
 
-                return promise;
+                // return promise;
             };
 
             this.activate = activate.bind(this);

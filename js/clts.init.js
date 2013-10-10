@@ -11,18 +11,22 @@
         'clts.dataCollect',
     ]);
 
-    app.run(['$rootScope',
-        'championModel', 'faqsModel', 'pagesModel',
-        function($rootScope, championModel, faqsModel, pagesModel) {
+    app.run([
+        '$rootScope',
+        '$navigate',
+        'championModel',
+        'faqsModel',
+        'pagesModel',
 
+        function($rootScope, $navigate, championModel, faqsModel, pagesModel) {
 
             if (championModel.champion.activated === false) {
-                window.location = '#/champion/activate';
+                $navigate.go('/champion/activate', false);
             }
 
-            faqsModel.update();
-            pagesModel.update('training');
-  
+            // TODO: grab faqs and pages updates.
+            // faqsModel.update();
+            // pagesModel.update('training');  
         }
     ]);
 
@@ -30,7 +34,7 @@
         function ($navigate) {
         return {
             restrict: 'A',
-            templateUrl: 'toolbar.html',
+            templateUrl: 'templates/toolbar.html',
             link: function ($scope, $el, attrs) {
                 $scope.back = function(p) {
                     $navigate.go(p, undefined, true);
@@ -64,11 +68,6 @@
 
                 console.log('-- done');
             };
-
-            $scope.pew = function() {
-                console.log('gogogogo')
-                navigationContext.startVillageListActivity();
-            }
         }
     ]);
 
