@@ -71,6 +71,8 @@
 
                 championModel.activate(msisdn).then(function(o) {
 
+                    console.log(o);
+
                     //$scope.champion = championModel.champion;
                     
                     
@@ -79,7 +81,7 @@
         }
     ]);
 
-    app.controller('welcomeController', 
+    app.controller('welcomeController',
 
         ['$scope', '$navigate', 'championModel', 'villagesModel',
         function($scope, $navigate, championModel, villagesModel) {
