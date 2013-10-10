@@ -46,7 +46,7 @@
         $routeProvider.
             when('/pages/training/', {
                 controller: 'pagesController',
-                templateUrl: 'pages.html'
+                templateUrl: 'templates/pages.html'
             });
     });
 

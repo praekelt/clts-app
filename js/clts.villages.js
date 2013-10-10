@@ -2,7 +2,10 @@
 
     var app = angular.module('clts.villages', []);
 
-    app.factory('villagesModel', ['$rootScope', '$http',
+    app.factory('villagesModel', [
+        '$rootScope',
+        '$http',
+        
         function($rootScope, $http) {
 
             var _that = this;
@@ -25,8 +28,9 @@
         }
     ]);
 
-    app.controller('selectVillageController',
-        ['$scope', 'villagesModel',
+    app.controller('selectVillageController',[
+        '$scope', 
+        'villagesModel',
         
         function($scope, villagesModel) {
 
@@ -66,7 +70,7 @@
         $routeProvider.
             when('/village/select', {
                 controller: 'selectVillageController',
-                templateUrl: 'village_select.html'
+                templateUrl: 'templates/village_select.html'
             });
     });
 

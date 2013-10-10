@@ -41,7 +41,7 @@
         $routeProvider.
             when('/faqs', {
                 controller: 'faqsController',
-                templateUrl: 'faqs.html'
+                templateUrl: 'templates/faqs.html'
             });
     });
 
