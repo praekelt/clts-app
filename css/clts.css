@@ -358,9 +358,6 @@ table {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.mb-page {
-  padding: 9px;
-}
 .error {
   color: red;
 }

@@ -43,6 +43,9 @@
                     alert('Not running with-in ZIGGY!');
                     return;
                 }
+
+                console.log('*** opening form: ' + name + ' with fieldOverrides: ' + JSON.stringify(meta));
+
                 window.formContext.startFormActivity(name, undefined, JSON.stringify(meta));
             };
         }

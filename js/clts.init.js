@@ -25,8 +25,9 @@
             }
 
             // TODO: grab faqs and pages updates.
-            // faqsModel.update();
-            // pagesModel.update('training');  
+            faqsModel.update();
+            pagesModel.update('training');
+            
         }
     ]);
 
@@ -55,7 +56,7 @@
                 if (confirm("Are you sure you want to RESET the app?")) {
 
                     window.localStorage.clear();
-                    window.location = '/';
+                    window.location = '#/';
                 }
             };
 
