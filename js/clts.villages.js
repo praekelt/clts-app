@@ -1,6 +1,10 @@
 (function() {
 
-    var app = angular.module('clts.villages', []);
+    var app = angular.module('clts.villages', [
+        'ngRoute',
+        'ngTouch',
+        'ajoslin.mobile-navigate',
+    ]);
 
     app.factory('villagesModel', [
         '$http',

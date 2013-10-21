@@ -1,6 +1,10 @@
 (function() {
 
-    var app = angular.module('clts.faqs', []);
+    var app = angular.module('clts.faqs', [
+        'ngRoute',
+        'ngTouch',
+        'ajoslin.mobile-navigate',
+    ]);
 
     app.factory('faqsModel', ['$rootScope', '$http',
         function($rootScope, $http) {

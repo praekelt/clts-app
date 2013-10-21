@@ -1,6 +1,12 @@
 (function() {
 
-    var app = angular.module('clts.champion', ['clts.villages']);
+    var app = angular.module('clts.champion', [
+        'ngRoute',
+        'ngTouch',
+        'ajoslin.mobile-navigate',
+
+        'clts.villages'
+    ]);
 
 
 
@@ -10,8 +16,9 @@
         
         function($rootScope, $http) {
 
-            this.champion = window.clts.storage.get('champion') || {};
+            this.champion = window.clts.storage.get('champion') || {activated: false};
             var activate = function(msisdn) {
+
                 var that = this;
 
                 var promise =$http.post(window.clts.api.url('champions', msisdn, 'activate')).
@@ -58,6 +65,10 @@
             $scope.activate = function(msisdn) {
                 championModel.activate(msisdn).
                     then(function() {
+
+                        $scope.champion = championModel.champion;
+
+
                         if (championModel.champion.activated) {
                             $navigate.go('/champion/welcome');
                         }

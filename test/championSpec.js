@@ -28,12 +28,15 @@ describe('clts.champion', function() {
     });
 
     it('should activate the champion', function() {
+        
         $_httpBackend_.expectPOST('/champions/1234567890/activate/').
             respond(200, {champion: {activated: true}});
+
+        $_httpBackend_.expectGET('templates/champion_welcome.html').
+            respond(200, '');
         
         myScope.activate('1234567890');
         $_httpBackend_.flush();
-
         expect(myScope.champion.activated).toEqual(true);
 
     });
