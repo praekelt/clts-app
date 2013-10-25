@@ -40,7 +40,7 @@
             $scope.openForm = function(name, village)
             {
                 var meta = {
-                    fieldOverrides: "{\"name\":\""+ village.name + "\",\"code\":\"\"}"
+                    fieldOverrides: "{\"name\":\""+ village.name + "\",\"code\":\"1234\"}"
                 };
 
                 if (typeof(window.formContext) === 'undefined') {
