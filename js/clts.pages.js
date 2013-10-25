@@ -1,6 +1,10 @@
 (function() {
 
-    var app = angular.module('clts.pages', []);
+    var app = angular.module('clts.pages', [
+        'ngRoute',
+        'ngTouch',
+        'ajoslin.mobile-navigate',
+    ]);
 
     app.factory('pagesModel', ['$rootScope', '$http',
         function($rootScope, $http) {
@@ -14,7 +18,6 @@
 
             var update = function(category) {
 
-                var _that = this;
                 var url = window.clts.api.url('pages', category);
                 
                 
@@ -28,25 +31,63 @@
                 return promise;
             };
 
+
+            var get = function(category, id) {
+
+
+
+                for (var index in _that.pages[category]) {
+                    page = _that.pages[category][index];
+
+                    if (page.id == id) return page;
+                }
+
+                return {
+                    title: 'Not found?'
+                };
+            };
+
             this.pages = pages;
             this.update = update;
+            this.get = get;
             return this;
         }
     ]);
 
-    app.controller('pagesController',
-        ['$scope', 'pagesModel',
+    app.controller('pagesController', [
+        '$scope',
+        '$routeParams',
+        '$navigate',
+
+        'pagesModel',
         
-        function($scope, pagesModel) {
+        function($scope, $routeParams, $navigate, pagesModel) {
+
+            
+
+            var category = $routeParams.category;
+            var id = $routeParams.id;
+                
+            $scope.category = category;
             $scope.pages = pagesModel.pages;
+            $scope.$navigate = $navigate;
+
+
+            if (id) {
+                $scope.page = pagesModel.get(category, id);
+            }
         }
     ]);
 
     app.config(function($routeProvider) {
         $routeProvider.
-            when('/pages/training/', {
+            when('/pages/:category/', {
                 controller: 'pagesController',
                 templateUrl: 'templates/pages.html'
+            }).
+            when('/pages/:category/:id/', {
+                controller: 'pagesController',
+                templateUrl: 'templates/pages_detail.html'
             });
     });
 
